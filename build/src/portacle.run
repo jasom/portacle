@@ -1,7 +1,14 @@
 #!/bin/sh
-SCRIPT="`dirname "$(readlink -f $0)"`"
+SCRIPT="$(
+cd ${0%/*}
+/bin/sh ./fixup.sh "$PWD/lin"
+echo $PWD
+)"
+
+  
+#SCRIPT="`dirname "$(readlink -f $0)"`"
 export ROOT="$SCRIPT/"
 ## Fix the icon
-sed -i "s,Icon=.*,Icon=$ROOT/portacle.svg,g" "$ROOT/portacle.desktop"
+$ROOT/lin/bin/sed -i "s,Icon=.*,Icon=$ROOT/portacle.svg,g" "$ROOT/portacle.desktop"
 
 "$ROOT/lin/launcher/portacle" "$@"

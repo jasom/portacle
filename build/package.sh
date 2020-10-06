@@ -49,6 +49,9 @@ function build() {
         lin) cp -fv "$SOURCE_DIR/portacle.desktop" "$INSTALL_DIR/"
              cp -fv "$SOURCE_DIR/portacle.run" "$INSTALL_DIR/"
              cp -fv "$SOURCE_DIR/portacle.svg" "$INSTALL_DIR/"
+             ensure-installed  "$INSTALL_DIR/lin/bin" "$(which patchelf)"
+             sh "$SOURCE_DIR/gen_fixup.sh" "$INSTALL_DIR/" > "$INSTALL_DIR/fixup.sh"
+             bash "$SOURCE_DIR/post_fixup.sh" "$INSTALL_DIR/"
              ;;
         mac) mkdir -p "$INSTALL_DIR/Portacle.app/Contents/MacOS/"
              mkdir -p "$INSTALL_DIR/Portacle.app/Contents/Resources/"

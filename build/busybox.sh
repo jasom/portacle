@@ -1,6 +1,6 @@
 #!/bin/bash
 
-readonly TAG=1_25_1
+readonly TAG=1_32_0
 readonly REPOSITORY=git://busybox.net/busybox.git
 
 ###
@@ -49,7 +49,8 @@ function install() {
              ensure-dependencies $(find-binaries "$SHARED_BIN_DIR/") ;;
         mac) status 2 "Skipping install, the OS provides the tools." ;;
         lin) make CONFIG_PREFIX="$INSTALL_DIR" install\
-                   || eexit "The install failed. Please check the output for error messages." ;;
+                   || eexit "The install failed. Please check the output for error messages."
+             ensure-installed "$SHARED_BIN_DIR/busybox" ;;
     esac
 }
 
